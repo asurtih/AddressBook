@@ -1,0 +1,19 @@
+.style-select {
+  width: 100%;
+  padding: 5px 30px 5px 10px;
+  padding: 0.3125rem 1.875rem 0.3125rem 0.625rem;
+  height: 40px;
+  height: 2.5rem;
+}
+
+.sort-container {
+  padding-bottom: 20px;
+}
+
+.sort-label {
+  padding-top: 10px;
+}
+
+.showingResult {
+  margin-bottom: 20px;
+}

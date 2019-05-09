@@ -1,0 +1,40 @@
+.addressBox {
+  height: 260.25px;
+  margin-bottom: 30px;
+  display: flex;
+  flex-direction: column;
+}
+
+.setDefaultAddress {
+  padding: 0px 10px 3px 3px;
+  border: 1.25px solid #ccc;
+}
+
+.setDefaultAddress.default {
+  background-color: #3071a9;
+}
+
+.setDefaultAddress.default span {
+  padding: 0.375rem 0.75rem;
+  display: inline-block;
+  color: #fff;
+  border: 1px solid transparent;
+}
+
+.flexOrder {
+  order: -1;
+}
+
+.addressListBox {
+  padding: 15px;
+  border-left: 1.25px solid #ccc;
+  border-right: 1.25px solid #ccc;
+  height: 100%;
+}
+
+.addressBoxButtonRow {
+  border-left: 1.25px solid #ccc;
+  border-right: 1.25px solid #ccc;
+  border-bottom: 1.25px solid #ccc;
+  text-align: right;
+}
