@@ -26,3 +26,15 @@ export const FIRST_NAME_Z_A = "First Name (Z-A)";
 export const LAST_NAME_A_Z = "Last Name (A-Z)";
 export const LAST_NAME_Z_A = "Last Name (Z-A)";
 export const SORT_BY = "Sort By: ";
+
+export const EMAIL_REQUIRED = "Email is required";
+export const EMAIL_INVALID = "Email address is invalid";
+export const FIRST_NAME_REQUIRED = "First Name is required";
+export const LAST_NAME_REQUIRED = "Last Name is required";
+export const ADDRESS_REQUIRED = "Address is required";
+export const ZIP_CODE_REQUIRED = "Zip code is required";
+export const ZIP_CODE_INVALID = "Zip Code has to be 5 digits";
+export const STATE_REQUIRED = "State is required";
+export const CITY_REQUIRED = "City is required";
+export const PHONE_REQUIRED = "Phone is required";
+export const PHONE_INVALID = "Phone is invalid.";
