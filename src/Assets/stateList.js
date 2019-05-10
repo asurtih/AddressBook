@@ -1,3 +1,7 @@
+/**
+ * List of states to be displayed in state selection
+ */
+
 export const states = [
   { code: "NO_STATE_TYPE_SELECTED", displayName: "Select" },
 

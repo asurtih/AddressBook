@@ -61,7 +61,7 @@ export const CostcoPagination = ({
               </button>
             </Pagination.Item>
           ))}
-          {currentPage !== pagesCount ? (
+          {currentPage !== pagesCount && pagesCount > 0 ? (
             <Pagination.Item>
               <button
                 type="button"

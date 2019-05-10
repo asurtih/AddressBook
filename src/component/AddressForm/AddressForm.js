@@ -4,7 +4,23 @@ import * as stringConst from "../../Assets/stringConstant/stringConstant";
 import Button from "react-bootstrap/Button";
 import styles from "./AddressForm.module.css";
 import { states } from "../../Assets/stateList";
-
+import MaskedInput from "react-text-mask";
+import { validate } from "./AddressValidationRules";
+import PropTypes from "prop-types";
+/**
+ *  Display individual address
+ *
+ * @param {props} {
+ *   address,
+ *   addressTypeSelected,
+ *   currentDefaultAddrId,
+ *   setCurrentDefaultAddrId,
+ *   onSetDefaultAddress,
+ *   onRemoveAddress,
+ *   onEditAddress
+ * }
+ * @returns JSX element that display each individual address
+ */
 export const AddressForm = ({
   address,
   onSaveAddress,
@@ -50,6 +66,7 @@ export const AddressForm = ({
       <Formik
         initialValues={initialValues}
         enableReinitialize={true}
+        validate={values => validate(values)}
         onSubmit={values =>
           onSaveAddress({
             ...values,
@@ -72,7 +89,11 @@ export const AddressForm = ({
                   name="firstName"
                   id="firstName"
                 />
-                <ErrorMessage name="firstName" component="div" />
+                <ErrorMessage
+                  name="firstName"
+                  component="div"
+                  className="text-danger"
+                />
               </div>
               <div className="form-group col-sm-12 col-md-6">
                 <label htmlFor="lastName">{stringConst.LAST_NAME}</label>
@@ -82,7 +103,11 @@ export const AddressForm = ({
                   name="lastName"
                   id="lastName"
                 />
-                <ErrorMessage name="lastName" component="div" />
+                <ErrorMessage
+                  name="lastName"
+                  component="div"
+                  className="text-danger"
+                />
               </div>
             </div>
             <div className="row">
@@ -96,7 +121,11 @@ export const AddressForm = ({
                   name="addressLine1"
                   id="addressLine1"
                 />
-                <ErrorMessage name="addressLine1" component="div" />
+                <ErrorMessage
+                  name="addressLine1"
+                  component="div"
+                  className="text-danger"
+                />
               </div>
             </div>
             <div className="row">
@@ -108,7 +137,6 @@ export const AddressForm = ({
                   name="zipCode"
                   id="zipCode"
                   onChange={e => {
-                    console.log("handleChange called");
                     handleChange(e);
                     let zipCodeLength = e.currentTarget.value;
                     if (zipCodeLength.trim().length > 4) {
@@ -116,7 +144,11 @@ export const AddressForm = ({
                     }
                   }}
                 />
-                <ErrorMessage name="zipcode" component="div" />
+                <ErrorMessage
+                  name="zipCode"
+                  component="div"
+                  className="text-danger"
+                />
               </div>
             </div>
 
@@ -129,7 +161,11 @@ export const AddressForm = ({
                   name="city"
                   id="city"
                 />
-                <ErrorMessage name="city" component="div" />
+                <ErrorMessage
+                  name="city"
+                  component="div"
+                  className="text-danger"
+                />
               </div>
               <div className="form-group col-sm-12 col-md-6">
                 <label htmlFor="state">{stringConst.STATE}</label>
@@ -140,20 +176,46 @@ export const AddressForm = ({
                     </option>
                   ))}
                 </Field>
-                <ErrorMessage name="state" component="div" />
+                <ErrorMessage
+                  name="state"
+                  component="div"
+                  className="text-danger"
+                />
               </div>
             </div>
             <div className="row">
               <div className="form-group col-sm-12 col-md-6">
                 <label htmlFor="phone">{stringConst.PHONE}</label>
                 <Field
-                  className="form-control"
-                  type="tel"
                   name="phone"
-                  id="phone"
-                  pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
+                  render={({ field }) => {
+                    return (
+                      <MaskedInput
+                        mask={[
+                          /[1-9]/,
+                          /\d/,
+                          /\d/,
+                          "-",
+                          /\d/,
+                          /\d/,
+                          /\d/,
+                          "-",
+                          /\d/,
+                          /\d/,
+                          /\d/,
+                          /\d/
+                        ]}
+                        {...field}
+                        className="form-control"
+                      />
+                    );
+                  }}
                 />
-                <ErrorMessage name="phone" component="div" />
+                <ErrorMessage
+                  name="phone"
+                  component="div"
+                  className="text-danger"
+                />
               </div>
             </div>
             <div className="row">
@@ -165,7 +227,11 @@ export const AddressForm = ({
                   name="email"
                   id="email"
                 />
-                <ErrorMessage name="email" component="div" />
+                <ErrorMessage
+                  name="email"
+                  component="div"
+                  className="text-danger"
+                />
               </div>
             </div>
             <div className="row">
@@ -186,10 +252,31 @@ export const AddressForm = ({
                 </Button>
               </div>
             </div>
-            <pre>{JSON.stringify(values, null, 2)}</pre>
           </Form>
         )}
       </Formik>
     </>
   );
+};
+
+AddressForm.propTypes = {
+  address: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.shape({
+      id: PropTypes.number,
+      firstName: PropTypes.string,
+      lastName: PropTypes.string,
+      addressLine1: PropTypes.string,
+      city: PropTypes.string,
+      state: PropTypes.string,
+      zipCode: PropTypes.string,
+      email: PropTypes.string,
+      phone: PropTypes.string,
+      isPrimary: PropTypes.bool,
+      addressType: PropTypes.string
+    })
+  ]),
+  onSaveAddress: PropTypes.func,
+  handleCancel: PropTypes.func,
+  addressTypeSelected: PropTypes.string.isRequired
 };

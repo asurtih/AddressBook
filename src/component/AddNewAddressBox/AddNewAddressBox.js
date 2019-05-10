@@ -28,7 +28,8 @@ export const AddNewAddressBox = ({ buttonText, onAddNewAddress }) => {
 };
 
 AddNewAddressBox.propTypes = {
-  buttonText: PropTypes.string
+  buttonText: PropTypes.string,
+  onAddNewAddress: PropTypes.func.isRequired
 };
 
 AddNewAddressBox.defaultProps = {

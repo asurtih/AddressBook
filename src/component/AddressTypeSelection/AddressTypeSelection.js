@@ -1,19 +1,23 @@
 import React from "react";
-import globalStyles from "../../Assets/bootstrap.min.module.css";
-
 import styles from "./AddressTypeSelection.module.css";
 
+/**
+ * Component to select different address Type
+ *
+ * @param {props} {
+ *   onDeliveryAddressSelect,
+ *   onBillingAddressSelect,
+ *   addressTypeSelected
+ * }
+ * @returns JSX element to allow for selecting different address type
+ */
 export const AddressTypeSelection = ({
   onDeliveryAddressSelect,
   onBillingAddressSelect,
   addressTypeSelected
 }) => {
   return (
-    <div
-      className={[globalStyles["col-sm-12"], globalStyles["col-lg-6"]].join(
-        " "
-      )}
-    >
+    <div className="col-sm-12 col-lg-6">
       <div className={styles.table}>
         <div className={styles["table-row"]}>
           <div
@@ -26,7 +30,7 @@ export const AddressTypeSelection = ({
               id="delivery"
               type="button"
               onClick={e => onDeliveryAddressSelect(e.target.id)}
-              className={[globalStyles.btn, globalStyles["btn-link"]].join(" ")}
+              className="btn btn-link"
             >
               Delivery
             </button>
@@ -41,7 +45,7 @@ export const AddressTypeSelection = ({
               type="button"
               id="billing"
               onClick={e => onBillingAddressSelect(e.target.id)}
-              className={[globalStyles.btn, globalStyles["btn-link"]].join(" ")}
+              className="btn btn-link"
             >
               Billing
             </button>

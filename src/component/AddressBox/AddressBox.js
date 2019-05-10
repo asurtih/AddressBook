@@ -1,7 +1,21 @@
 import React, { useEffect } from "react";
 import styles from "./AddressBox.module.css";
 import * as stringConst from "../../Assets/stringConstant/stringConstant";
-
+import PropTypes from "prop-types";
+/**
+ *  Display individual address
+ *
+ * @param {props} {
+ *   address,
+ *   addressTypeSelected,
+ *   currentDefaultAddrId,
+ *   setCurrentDefaultAddrId,
+ *   onSetDefaultAddress,
+ *   onRemoveAddress,
+ *   onEditAddress
+ * }
+ * @returns JSX element that display each individual address
+ */
 export const AddressBox = ({
   address,
   addressTypeSelected,
@@ -13,7 +27,6 @@ export const AddressBox = ({
 }) => {
   useEffect(() => {
     if (address.isPrimary) {
-      console.log("set current default addres id");
       setCurrentDefaultAddrId(address.id);
     }
   }, []);
@@ -41,15 +54,7 @@ export const AddressBox = ({
   }
 
   return (
-    <div
-      className={[
-        "col-sm-12",
-        "col-md-6",
-        "col-lg-4",
-        "col-xl-3"
-        //address.isPrimary ? styles.flexOrder : ""
-      ].join(" ")}
-    >
+    <div className="col-sm-12 col-md-6 col-lg-4 col-xl-3">
       <div className={styles.addressBox}>
         <div
           className={[
@@ -101,4 +106,26 @@ export const AddressBox = ({
       </div>
     </div>
   );
+};
+
+AddressBox.propTypes = {
+  address: PropTypes.shape({
+    id: PropTypes.number,
+    firstName: PropTypes.string,
+    lastName: PropTypes.string,
+    addressLine1: PropTypes.string,
+    city: PropTypes.string,
+    state: PropTypes.string,
+    zipCode: PropTypes.string,
+    email: PropTypes.string,
+    phone: PropTypes.string,
+    isPrimary: PropTypes.bool,
+    addressType: PropTypes.string
+  }).isRequired,
+  addressTypeSelected: PropTypes.string.isRequired,
+  currentDefaultAddrId: PropTypes.number.isRequired,
+  setCurrentDefaultAddrId: PropTypes.func.isRequired,
+  onSetDefaultAddress: PropTypes.func.isRequired,
+  onRemoveAddress: PropTypes.func.isRequired,
+  onEditAddress: PropTypes.func.isRequired
 };
