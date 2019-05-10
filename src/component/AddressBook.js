@@ -56,7 +56,7 @@ export const AddressBook = ({
 
   //initialize total count
   let totalCount = 0;
-  let finalAddress = "";
+  let finalAddress = [];
 
   if (addresses) {
     //need to filtered address by addresstypeselected
@@ -71,8 +71,6 @@ export const AddressBook = ({
       ["desc", sortCriteria.sortOrder]
     );
 
-    console.log("sortedAddress: " + JSON.stringify(sortedAddresses));
-
     finalAddress = paginate(
       sortedAddresses,
       paginationData.currentPage,
@@ -80,7 +78,6 @@ export const AddressBook = ({
     );
 
     totalCount = filteredAddresses.length;
-    console.log("totalCount: " + totalCount);
   }
 
   return (

@@ -13,7 +13,6 @@ export const AddressBox = ({
 }) => {
   useEffect(() => {
     if (address.isPrimary) {
-      console.log("set current default addres id");
       setCurrentDefaultAddrId(address.id);
     }
   }, []);
@@ -41,15 +40,7 @@ export const AddressBox = ({
   }
 
   return (
-    <div
-      className={[
-        "col-sm-12",
-        "col-md-6",
-        "col-lg-4",
-        "col-xl-3"
-        //address.isPrimary ? styles.flexOrder : ""
-      ].join(" ")}
-    >
+    <div className="col-sm-12 col-md-6 col-lg-4 col-xl-3">
       <div className={styles.addressBox}>
         <div
           className={[

@@ -1,5 +1,14 @@
 import * as stringConst from "../../Assets/stringConstant/stringConstant";
 
+/**
+ * Validation rules for AddressForm
+ * @param {*} values key value pair of input field name
+ * and its value
+ *
+ * @returns errors contain key value pair of
+ * input field name and its error message like
+ * email: "Email is required"
+ */
 export const validate = values => {
   let errors = {};
   if (!values.email) {
