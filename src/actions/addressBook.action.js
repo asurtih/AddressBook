@@ -14,11 +14,19 @@ export const CHANGE_SORT_ADDRESS = "CHANGE_SORT_ADDRESS";
 export const HANDLE_PAGINATION_PAGE_CHANGE = "HANDLE_PAGINATION_PAGE_CHANGE";
 export const HANDLE_PAGINATION_NEXT_PREVIOUS =
   "HANDLE_PAGINATION_NEXT_PREVIOUS";
+export const REMOVE_DEFAULT_ADDRESS = "REMOVE_DEFAULT_ADDRESS";
 
+/**
+ * This action will called if we removed a default address
+ * It will reset the default address Id to -1
+ */
+export const handleDefaultAddressRemoval = () => ({
+  type: REMOVE_DEFAULT_ADDRESS
+});
 /**
  * This action is called when Next and Previous pagination link
  * is clicked
- * @param {*} actionType this is to tell which action that user
+ * @param {string} actionType this is to tell which action that user
  * wants either Next Page or Previous Page
  */
 export const handlePaginationNextPrevious = actionType => ({
@@ -139,10 +147,12 @@ export const getAddress = () => {
  * @param {*} currentDefaultAddressId the id of the previous default address
  */
 function updateCurrentDefaultAddress(currentDefaultAddressId) {
-  return axios.patch(
-    "http://localhost:3050/addresses/" + currentDefaultAddressId,
-    { isPrimary: false }
-  );
+  return currentDefaultAddressId !== -1
+    ? axios.patch(
+        "http://localhost:3050/addresses/" + currentDefaultAddressId,
+        { isPrimary: false }
+      )
+    : null;
 }
 
 /**
@@ -184,11 +194,18 @@ export const changeDefaultAddress = (currentDefaultAddressId, addressId) => {
  * @param {*} addressId selected address id
  */
 export const removeAddressData = addressId => {
-  return dispatch => {
+  return (dispatch, getState) => {
+    const state = getState();
+    const removedAddress = state.addresses.find(address => {
+      return address.id === addressId;
+    });
     axios
       .delete(`http://localhost:3050/addresses/${addressId}`)
       .then(() => {
         dispatch(cancelRemoveAddress());
+        if (removedAddress.isPrimary) {
+          dispatch(handleDefaultAddressRemoval());
+        }
       })
       .then(() => {
         dispatch(getAddress());

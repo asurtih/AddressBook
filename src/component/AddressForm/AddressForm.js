@@ -6,7 +6,21 @@ import styles from "./AddressForm.module.css";
 import { states } from "../../Assets/stateList";
 import MaskedInput from "react-text-mask";
 import { validate } from "./AddressValidationRules";
-
+import PropTypes from "prop-types";
+/**
+ *  Display individual address
+ *
+ * @param {props} {
+ *   address,
+ *   addressTypeSelected,
+ *   currentDefaultAddrId,
+ *   setCurrentDefaultAddrId,
+ *   onSetDefaultAddress,
+ *   onRemoveAddress,
+ *   onEditAddress
+ * }
+ * @returns JSX element that display each individual address
+ */
 export const AddressForm = ({
   address,
   onSaveAddress,
@@ -172,13 +186,6 @@ export const AddressForm = ({
             <div className="row">
               <div className="form-group col-sm-12 col-md-6">
                 <label htmlFor="phone">{stringConst.PHONE}</label>
-                {/*                 <Field
-                  className="form-control"
-                  type="tel"
-                  name="phone"
-                  id="phone"
-                  pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
-                /> */}
                 <Field
                   name="phone"
                   render={({ field }) => {
@@ -250,4 +257,26 @@ export const AddressForm = ({
       </Formik>
     </>
   );
+};
+
+AddressForm.propTypes = {
+  address: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.shape({
+      id: PropTypes.number,
+      firstName: PropTypes.string,
+      lastName: PropTypes.string,
+      addressLine1: PropTypes.string,
+      city: PropTypes.string,
+      state: PropTypes.string,
+      zipCode: PropTypes.string,
+      email: PropTypes.string,
+      phone: PropTypes.string,
+      isPrimary: PropTypes.bool,
+      addressType: PropTypes.string
+    })
+  ]),
+  onSaveAddress: PropTypes.func,
+  handleCancel: PropTypes.func,
+  addressTypeSelected: PropTypes.string.isRequired
 };

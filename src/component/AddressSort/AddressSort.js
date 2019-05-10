@@ -2,21 +2,31 @@ import React from "react";
 import { sorts } from "../../Assets/addressSort";
 import * as stringConst from "../../Assets/stringConstant/stringConstant";
 import styles from "./AddressSort.module.css";
-
+import PropTypes from "prop-types";
+/**
+ * sort by dropdown
+ *
+ * @param {props} {
+ *   onChangeSortCriteria,
+ *   totalCount,
+ *   pageSize,
+ *   currentPage
+ * }
+ * @returns JSX element to display the sort by dropdown and the showing result count
+ */
 export const AddressSort = ({
   onChangeSortCriteria,
   totalCount,
   pageSize,
   currentPage
 }) => {
+  //calculate the start item number and end item number
+  //and total items to be displayed in "showing result" section
   const startItemNumber = (currentPage - 1) * pageSize + 1;
-
   let endItemNumber = startItemNumber + pageSize - 1;
-
   if (totalCount < endItemNumber) {
     endItemNumber = totalCount;
   }
-
   const showingResult = `Showing result ${startItemNumber} - ${endItemNumber} of ${totalCount}`;
 
   return (
@@ -52,4 +62,11 @@ export const AddressSort = ({
       </div>
     </>
   );
+};
+
+AddressSort.propTypes = {
+  onChangeSortCriteria: PropTypes.func.isRequired,
+  totalCount: PropTypes.number.isRequired,
+  pageSize: PropTypes.number.isRequired,
+  currentPage: PropTypes.number.isRequired
 };

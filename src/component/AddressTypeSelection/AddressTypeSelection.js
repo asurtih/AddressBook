@@ -1,6 +1,16 @@
 import React from "react";
 import styles from "./AddressTypeSelection.module.css";
 
+/**
+ * Component to select different address Type
+ *
+ * @param {props} {
+ *   onDeliveryAddressSelect,
+ *   onBillingAddressSelect,
+ *   addressTypeSelected
+ * }
+ * @returns JSX element to allow for selecting different address type
+ */
 export const AddressTypeSelection = ({
   onDeliveryAddressSelect,
   onBillingAddressSelect,

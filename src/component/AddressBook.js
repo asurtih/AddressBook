@@ -45,7 +45,10 @@ export const AddressBook = ({
 
   let addressFormTitle = "";
 
-  if (selectedAddressId) {
+  //if the selected address id is present
+  //then user click the edit button
+  //otherwise the user click the add new address button
+  if (selectedAddressId !== -1) {
     addressFormTitle =
       addressTypeSelected === "S"
         ? stringConst.EDIT_SHIPPING_ADDRESS
@@ -54,7 +57,7 @@ export const AddressBook = ({
     addressFormTitle = stringConst.ADD_NEW_ADDRESS;
   }
 
-  //initialize total count
+  //initialize total count and final address to be displayed
   let totalCount = 0;
   let finalAddress = [];
 
@@ -71,6 +74,8 @@ export const AddressBook = ({
       ["desc", sortCriteria.sortOrder]
     );
 
+    //get a list of address to be disaplayed based on
+    //page size and current page
     finalAddress = paginate(
       sortedAddresses,
       paginationData.currentPage,
@@ -145,22 +150,21 @@ export const AddressBook = ({
       <CostcoModal
         show={modalStatus.showAddressFormModal}
         titleText={addressFormTitle}
-        primaryBtnText={stringConst.SAVE_ADDRESS}
-        secondaryBtnText={stringConst.CANCEL}
         handleClose={onCancelEditAddAddress}
         payload={selectedAddressId}
-        //handleConfirm={onRemoveAddressData}
         showModalFooter={false}
       >
         <AddressForm
           address={
-            selectedAddressId
+            selectedAddressId !== -1
               ? addresses.find(address => {
                   return address.id === selectedAddressId;
                 })
               : ""
           }
-          onSaveAddress={selectedAddressId ? onSaveAddress : onSaveNewAddress}
+          onSaveAddress={
+            selectedAddressId !== -1 ? onSaveAddress : onSaveNewAddress
+          }
           handleCancel={onCancelEditAddAddress}
           addressTypeSelected={addressTypeSelected}
         />

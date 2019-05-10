@@ -4,6 +4,23 @@ import Button from "react-bootstrap/Button";
 import styles from "./CostcoModal.module.css";
 import PropTypes from "prop-types";
 
+/**
+ * Component to display modal window
+ * You can pass different type of content in the body
+ * by passing children props
+ * @param {props} {
+ *   show,
+ *   handleClose,
+ *   handleConfirm,
+ *   titleText,
+ *   children,
+ *   secondaryBtnText,
+ *   primaryBtnText,
+ *   payload,
+ *   showModalFooter
+ * }
+ * @returns JSX element to allow for selecting different address type
+ */
 export const CostcoModal = ({
   show,
   handleClose,
@@ -43,8 +60,8 @@ export const CostcoModal = ({
 
 CostcoModal.propTypes = {
   show: PropTypes.bool,
-  handleClose: PropTypes.func,
-  handleConfirm: PropTypes.func,
+  handleClose: PropTypes.func.isRequired,
+  handleConfirm: PropTypes.func.isRequired,
   titleText: PropTypes.string,
   secondaryBtnText: PropTypes.string,
   primaryBtnText: PropTypes.string,

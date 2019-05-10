@@ -5,6 +5,9 @@ import {
   LAST_NAME_Z_A
 } from "../Assets/stringConstant/stringConstant";
 
+/**
+ * List of sorting criteria for the address
+ */
 export const sorts = [
   {
     value: { sortBy: "firstName", orderBy: "asc" },
