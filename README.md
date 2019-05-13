@@ -11,7 +11,7 @@ Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
 The page will reload if you make edits.<br>
 
-This project has mock service build into it. All the data is saved inside db.json. When you run the project with `npm start`, it will also run the mock service server. Open [http://localhost:3050](http://localhost:3050) to view it in the browser.<br>
+This project has mock service build into it. All the data is saved inside db.json. When you run the project with `npm start`, it will also run the mock service server. Open [http://localhost:3050/addresses](http://localhost:3050/addresses) to view it in the browser.<br>
 
 The following third party library is installed:
 
