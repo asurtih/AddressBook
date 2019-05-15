@@ -61,7 +61,7 @@ export const CostcoModal = ({
 CostcoModal.propTypes = {
   show: PropTypes.bool,
   handleClose: PropTypes.func.isRequired,
-  handleConfirm: PropTypes.func.isRequired,
+  handleConfirm: PropTypes.func,
   titleText: PropTypes.string,
   secondaryBtnText: PropTypes.string,
   primaryBtnText: PropTypes.string,
